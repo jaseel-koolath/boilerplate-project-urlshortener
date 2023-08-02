@@ -27,16 +27,13 @@ app.post("/api/shorturl", (req, res) => {
   const urlObject = new URL(originalURL);
   dns.lookup(urlObject.hostname, (err, address, family) => {
     if (err) {
-      res.json({
-        originalURL: originalURL,
-        shortenedURL: "Invalid URL",
-      });
+      res.json({ error: 'invalid url' });
     } else {
       var shortenedURL = Math.floor(Math.random() * 100000).toString();
       shortenedURLS[shortenedURL] = originalURL;
       res.json({
-        originalURL: originalURL,
-        shortenedURL: shortenedURL,
+        original_url: originalURL,
+        short_url: shortenedURL,
       });
     }
   });
